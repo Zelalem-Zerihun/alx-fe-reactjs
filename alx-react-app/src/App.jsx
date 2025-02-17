@@ -12,11 +12,9 @@ function App() {
 
   return (
     <>
-
-
-       <Header/>
-       <MainContent/>
-       <Footer/>
+      <Header />
+      <Footer />
+       <MainContent />
       <WelcomeMessage />
       <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
       <div>
