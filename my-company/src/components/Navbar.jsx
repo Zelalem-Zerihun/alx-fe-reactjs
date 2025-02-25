@@ -2,7 +2,15 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar">
+    <nav
+      className="navbar"
+      style={{
+        backgroundColor: "#f0f0f0",
+        padding: "10px",
+        display: "flex",
+        justifyContent: "space-around",
+      }}
+    >
       {" "}
       {/* Use class for styling */}
       <Link to="/" className="nav-link">
