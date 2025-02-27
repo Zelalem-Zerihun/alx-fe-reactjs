@@ -1,29 +1,44 @@
-import { create } from "zustand";
+import create from "zustand";
 
 const useRecipeStore = create((set) => ({
-  recipes: [],
-  searchTerm: "",
+  recipes: [], // List of all recipes
+  searchTerm: "", // Search term for filtering
+  favorites: [], // List of favorite recipe IDs
+  recommendations: [], // Personalized recommendations
+
+  // Actions to update search term and filter recipes
+  setSearchTerm: (term) => set({ searchTerm: term }),
   filteredRecipes: [],
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
-  deleteRecipe: (id) =>
+  filterRecipes: () =>
     set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== id),
-    })),
-  updateRecipe: (updatedRecipe) =>
-    set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      filteredRecipes: state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
       ),
     })),
-  setRecipes: (recipes) => set({ recipes }),
-  setSearchTerm: (term) =>
+
+  // Add recipe to favorites
+  addFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: [...state.favorites, recipeId],
+    })),
+
+  // Remove recipe from favorites
+  removeFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    })),
+
+  // Generate personalized recommendations based on favorites
+  generateRecommendations: () =>
     set((state) => {
-      const filtered = state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(term.toLowerCase())
+      const recommended = state.recipes.filter(
+        (recipe) => state.favorites.includes(recipe.id) && Math.random() > 0.5
       );
-      return { searchTerm: term, filteredRecipes: filtered };
+      return { recommendations: recommended };
     }),
+
+  // Set initial recipes (example usage)
+  setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }),
 }));
 
 export default useRecipeStore;
