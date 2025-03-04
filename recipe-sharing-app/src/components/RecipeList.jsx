@@ -1,29 +1,23 @@
-import { Link } from "react-router-dom";
-import useRecipeStore from "../store/recipeStore";
+import React from "react";
+import { Link } from "react-router-dom"; // Import Link
+import useRecipeStore from "../recipeStore";
 
 const RecipeList = () => {
-  const { filteredRecipes, searchTerm, recipes } = useRecipeStore((state) => ({
-    filteredRecipes: state.filteredRecipes,
-    searchTerm: state.searchTerm,
-    recipes: state.recipes,
-  }));
-
-  const displayedRecipes = searchTerm ? filteredRecipes : recipes;
+  const recipes = useRecipeStore((state) => state.recipes);
 
   return (
     <div>
       <h2>Recipe List</h2>
-      {displayedRecipes.length === 0 ? (
-        <p>No recipes found.</p>
-      ) : (
-        displayedRecipes.map((recipe) => (
-          <div key={recipe.id}>
+      <ul>
+        {recipes.map((recipe) => (
+          <li key={recipe.id}>
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
+            {/* Link to the individual recipe details page */}
             <Link to={`/recipe/${recipe.id}`}>View Details</Link>
-          </div>
-        ))
-      )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
