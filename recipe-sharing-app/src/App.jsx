@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import useRecipeStore from "./recipeStore";
 import SearchBar from "./SearchBar";
 import RecipeList from "./RecipeList";
 import FavoritesList from "./FavoritesList";
 import RecommendationsList from "./RecommendationsList";
+import RecipeDetails from "./RecipeDetails";
 
 const App = () => {
   const setRecipes = useRecipeStore((state) => state.setRecipes);
 
-  // Example recipes data
   useEffect(() => {
     setRecipes([
       {
@@ -35,13 +36,30 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Recipe Sharing App</h1>
-      <SearchBar />
-      <RecipeList />
-      <FavoritesList />
-      <RecommendationsList />
-    </div>
+    <Router>
+      <div>
+        <h1>Recipe Sharing App</h1>
+        <nav>
+          <Link to="/">Home</Link> | <Link to="/favorites">Favorites</Link> |{" "}
+          <Link to="/recommendations">Recommendations</Link>
+        </nav>
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <SearchBar />
+                <RecipeList />
+              </>
+            }
+          />
+          <Route path="/favorites" element={<FavoritesList />} />
+          <Route path="/recommendations" element={<RecommendationsList />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
