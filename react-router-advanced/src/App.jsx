@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import ProfileDetails from "./components/Profile/ProfileDetails";
-import ProfileSettings from "./components/Profile/ProfileSettings";
+import ProfileDetails from "./components/ProfileDetails";
+import ProfileSettings from "./components/ProfileSettings";
 import User from "./components/User";
 import BlogPost from "./components/BlogPost";
 
