@@ -3,8 +3,6 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import ProfileDetails from "./components/ProfileDetails";
-import ProfileSettings from "./components/ProfileSettings";
 import User from "./components/User";
 import BlogPost from "./components/BlogPost";
 
@@ -31,11 +29,7 @@ export default function App() {
               <Profile />
             </ProtectedRoute>
           }
-        >
-          {/* Nested Routes */}
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+        />
 
         {/* Dynamic Routes */}
         <Route path="/users/:userId" element={<User />} />
