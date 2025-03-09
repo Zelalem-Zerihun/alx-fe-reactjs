@@ -6,7 +6,7 @@ const Profile = () => (
     <nav>
       <Link to="details">Details</Link> |<Link to="settings">Settings</Link>
     </nav>
-    <Outlet />
+    <Outlet /> {/* Renders nested routes here */}
   </div>
 );
 

@@ -23,6 +23,7 @@ export default function App() {
         <Route path="/" element={<h1>Home Page</h1>} />
         <Route path="/login" element={<Login setAuth={setAuth} />} />
 
+        {/* Protected Profile Route */}
         <Route
           path="/profile"
           element={
@@ -31,10 +32,12 @@ export default function App() {
             </ProtectedRoute>
           }
         >
+          {/* Nested Routes */}
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
 
+        {/* Dynamic Routes */}
         <Route path="/users/:userId" element={<User />} />
         <Route path="/posts/:postId" element={<BlogPost />} />
       </Routes>
